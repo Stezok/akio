@@ -4,8 +4,7 @@ go 1.16
 
 require (
 	github.com/bwmarrin/discordgo v0.23.2
-	github.com/esimov/stackblur-go v1.0.2 // indirect
-	github.com/fogleman/gg v1.3.0 // indirect
+	github.com/fogleman/gg v1.3.0
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0

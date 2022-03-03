@@ -195,12 +195,12 @@ type GrainNoise struct {
 }
 
 func (gn *GrainNoise) generateNoiseImage(rect image.Rectangle) {
-	noise := image.NewGray16(rect)
+	noise := image.NewRGBA(rect)
 	for y := 0; y < rect.Dy(); y++ {
 		for x := 0; x < rect.Dx(); x++ {
 			grainChance := rand.Intn(100)
 			if grainChance < int(gn.grainFreq*100) {
-				noise.Set(x, y, randomNoisePixelGray16(gn.colorFocus))
+				noise.Set(x, y, randomNoisePixelColor())
 			}
 		}
 	}
@@ -224,7 +224,8 @@ func (gn *GrainNoise) At(x, y int) color.Color {
 	grainChance := rand.Intn(1000)
 	if grainChance < int(1000*gn.grainFreq) {
 		// noiseColor := randomNoisePixelGray16(gn.colorFocus)
-		noiseColor := randomNoisePixelColor()
+		// noiseColor := randomNoisePixelColor()
+		noiseColor := gn.noise.At(x, y)
 		return modes[gn.Mode](gn.src.At(x, y), noiseColor)
 	}
 	return gn.src.At(x, y)
