@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+
+a:active, a:hover, a {
+    text-decoration: none;
+    color: #000 !important;
+}
+
+.header {
+    height: 100vh;
+    max-height: 100vh;
+
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    position: static;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+
+    width: 100%;
+    max-width: 1400px;
+    margin-right: auto;
+    margin-left: auto;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navbuttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navlogo {
+    justify-self: start;
+}
+
+.navbutton {
+    display: flex;
+    justify-self: end;
+    align-items: center;
+    padding: 20px;
+
+    font-size: 24px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.container {
+    height: 70vh;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 60%;
+}
+
+.content-container h4 {
+    font-size: 16px;
+    font-weight: 600px;
+    line-height: 24px;
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.content-container h1 {
+    margin: 0;
+    font-size: 60px;
+}
+
+.discord-button {
+    align-self: center;
+    
+    width: 24%;
+    
+    border-radius: 3px;
+    border: 3px solid black;
+
+    padding: 10px;
+    font-size: 20px;
+    text-transform: uppercase;
+}
