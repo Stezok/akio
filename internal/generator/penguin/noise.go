@@ -221,14 +221,13 @@ func (gn *GrainNoise) At(x, y int) color.Color {
 		return gn.src.At(x, y)
 	}
 
-	grainChance := rand.Intn(1000)
-	if grainChance < int(1000*gn.grainFreq) {
-		// noiseColor := randomNoisePixelGray16(gn.colorFocus)
-		// noiseColor := randomNoisePixelColor()
-		noiseColor := gn.noise.At(x, y)
-		return modes[gn.Mode](gn.src.At(x, y), noiseColor)
+	// noiseColor := randomNoisePixelGray16(gn.colorFocus)
+	// noiseColor := randomNoisePixelColor()
+	noiseColor := gn.noise.At(x, y)
+	if _, _, _, a := noiseColor.RGBA(); a != maxComponent16 {
+		return gn.src.At(x, y)
 	}
-	return gn.src.At(x, y)
+	return modes[gn.Mode](gn.src.At(x, y), noiseColor)
 }
 
 func NewGrainNoise(src image.Image, colorFocus uint16, freq float64) *GrainNoise {
