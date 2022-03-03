@@ -226,8 +226,8 @@ func (bot *PenguBot) handleCommitCustomCallback(u *tgbotapi.Update) bool {
 			Reader: &buf,
 		}
 
-		photo := tgbotapi.NewPhoto(u.CallbackQuery.Message.Chat.ID, fileReader)
-		_, err = bot.Send(photo)
+		doc := tgbotapi.NewDocument(u.CallbackQuery.Message.Chat.ID, fileReader)
+		_, err = bot.Send(doc)
 		if err != nil {
 			log.Print(err)
 		}
