@@ -3,6 +3,7 @@ package penguin
 import (
 	"NFTProject/internal/generator/penguin/rules"
 	"NFTProject/internal/meta"
+	"NFTProject/pkg/imago"
 	"image"
 	"image/draw"
 	"image/png"
@@ -14,6 +15,37 @@ const partCount int = 15
 
 type PenguinGenerator struct {
 	*PartManager
+}
+
+func (pg *PenguinGenerator) GeneratePartNoise(w io.Writer, frMeta meta.FragmentMetadata) error {
+	file, err := os.Open(pg.GetPartPath(&frMeta))
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	img, _, err := image.Decode(file)
+	if err != nil {
+		return err
+	}
+
+	if frMeta.Slot == meta.Back {
+		grainNoise := imago.NewGrainNoise(img, 0, 0.6)
+		grainNoise.Mode = imago.Custom
+		err = png.Encode(w, grainNoise)
+		if err != nil {
+			return err
+		}
+	} else {
+		grainNoise := imago.NewGrainNoise(img, 0, 0.1)
+		grainNoise.Mode = imago.Overlay
+		err = png.Encode(w, grainNoise)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func (pg *PenguinGenerator) GenerateWithBackground(w io.Writer, bg string) error {
@@ -46,9 +78,8 @@ func (pg *PenguinGenerator) GenerateWithBackground(w io.Writer, bg string) error
 		}
 
 		if i == 0 {
-			colorFocus := 65535 * 0.4
-			grainNoise := NewGrainNoise(img, uint16(colorFocus), 0.6)
-			grainNoise.Mode = Custom
+			grainNoise := imago.NewGrainNoise(img, 0, 0.6)
+			grainNoise.Mode = imago.Custom
 			draw.Draw(background, background.Bounds(), grainNoise, image.Point{0, 0}, draw.Over)
 			filter.Filename = ""
 		} else {
@@ -57,13 +88,8 @@ func (pg *PenguinGenerator) GenerateWithBackground(w io.Writer, bg string) error
 
 	}
 
-	// colorFocus := 65535 * 0.6
-	// grainNoise := NewGrainNoise(pengu, uint16(colorFocus), 0.2)
-	// grainNoise.Mode = HardLight
-
-	colorFocus := 65535 * 0.7
-	grainNoise := NewGrainNoise(pengu, uint16(colorFocus), 0.1)
-	grainNoise.Mode = Overlay
+	grainNoise := imago.NewGrainNoise(pengu, 0, 0.1)
+	grainNoise.Mode = imago.Overlay
 
 	draw.Draw(background, background.Bounds(), grainNoise, image.Point{0, 0}, draw.Over)
 
@@ -100,8 +126,8 @@ func (pg *PenguinGenerator) GenerateRandomSingle(w io.Writer) error {
 
 		if i == 0 {
 			colorFocus := 65535 * 0.4
-			grainNoise := NewGrainNoise(img, uint16(colorFocus), 0.6)
-			grainNoise.Mode = Custom
+			grainNoise := imago.NewGrainNoise(img, uint16(colorFocus), 0.6)
+			grainNoise.Mode = imago.Custom
 			draw.Draw(background, background.Bounds(), grainNoise, image.Point{0, 0}, draw.Over)
 		} else {
 			draw.Draw(pengu, pengu.Bounds(), img, image.Point{0, 0}, draw.Over)
@@ -114,8 +140,8 @@ func (pg *PenguinGenerator) GenerateRandomSingle(w io.Writer) error {
 	// grainNoise.Mode = HardLight
 
 	colorFocus := 65535 * 0.7
-	grainNoise := NewGrainNoise(pengu, uint16(colorFocus), 0.1)
-	grainNoise.Mode = Overlay
+	grainNoise := imago.NewGrainNoise(pengu, uint16(colorFocus), 0.1)
+	grainNoise.Mode = imago.Overlay
 
 	draw.Draw(background, background.Bounds(), grainNoise, image.Point{0, 0}, draw.Over)
 

@@ -33,10 +33,8 @@ func (pr *PinguinRules) Decide(slot meta.Slot) Action {
 		return pr.PassWithChance(20)
 	case meta.StomAccessory:
 		return pr.PassWithChance(50)
-	case meta.HandAccessory:
-		return pr.PassWithChance(20)
 	case meta.Tail:
-		return pr.PassWithChance(15)
+		return pr.PassWithChance(50)
 	case meta.Forehead:
 		return pr.PassWithChance(33)
 	default:

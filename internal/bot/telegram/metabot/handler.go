@@ -145,8 +145,13 @@ func (bot *MetaBot) HandleAcceptMetadata(u *tgbotapi.Update) bool {
 		return true
 	}
 
+	fileName := fragmentMeta.FileName
+	if fragmentMeta.PromoTag != "" {
+		fileName += "_promo"
+	}
+
 	file := tgbotapi.FileReader{
-		Name:   fragmentMeta.FileName,
+		Name:   fileName,
 		Reader: buffer,
 	}
 

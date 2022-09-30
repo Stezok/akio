@@ -9,21 +9,23 @@ import (
 type Slot string
 
 const (
-	Back          Slot = "Back"
-	Shadow        Slot = "Shadow"
-	BackHand      Slot = "BackHand"
-	Tail          Slot = "Tail"
-	Body          Slot = "Body"
-	Stom          Slot = "Stom"
-	Hair          Slot = "Hair"
-	Forehead      Slot = "Forehead"
-	Eye           Slot = "Eye"
-	Beak          Slot = "Beak"
-	EyeAccessory  Slot = "EyeAccessory"
-	StomAccessory Slot = "StomAccessory"
-	HandAccessory Slot = "HandAccessory"
-	Paws          Slot = "Paws"
-	Watermark     Slot = "Watermark"
+	Back             Slot = "Back"
+	Shadow           Slot = "Shadow"
+	BackHand         Slot = "BackHand"
+	Tail             Slot = "Tail"
+	Body             Slot = "Body"
+	Stom             Slot = "Stom"
+	BackForehead     Slot = "FrontForehead"
+	Hair             Slot = "Hair"
+	Forehead         Slot = "Forehead"
+	Eye              Slot = "Eye"
+	Beak             Slot = "Beak"
+	EyeAccessory     Slot = "EyeAccessory"
+	StomAccessory    Slot = "StomAccessory"
+	StomAccessoryAdd Slot = "StomAccessoryAdd"
+	HandAccessory    Slot = "HandAccessory"
+	Paws             Slot = "Paws"
+	Watermark        Slot = "Watermark"
 )
 
 var (
@@ -34,13 +36,15 @@ var (
 		Tail,
 		Body,
 		Stom,
+		BackForehead,
 		Hair,
+		StomAccessoryAdd,
+		HandAccessory,
+		StomAccessory,
 		Forehead,
 		Eye,
-		StomAccessory,
 		Beak,
 		EyeAccessory,
-		HandAccessory,
 		Paws,
 		Watermark,
 	}
@@ -92,12 +96,20 @@ type PromoTag string
 const (
 	OlympicGame  PromoTag = "olympic_games"
 	RickAndMorty PromoTag = "rick_and_morty"
+	Anime        PromoTag = "anime"
+	TokyoGhoul   PromoTag = "tokyo_ghoul"
+	ScorpionMK   PromoTag = "scorpion_mk"
+	SubZeroMK    PromoTag = "sub_zero_mk"
 )
 
 var (
 	PromoTags = []PromoTag{
 		OlympicGame,
 		RickAndMorty,
+		Anime,
+		TokyoGhoul,
+		ScorpionMK,
+		SubZeroMK,
 	}
 )
 
